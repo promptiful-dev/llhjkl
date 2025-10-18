@@ -32,9 +32,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          # Enable caching for npm packages to speed up subsequent builds.
-          # This requires a package-lock.json file to be committed to the repository.
-          cache: 'npm'
       
       # It's a best practice to add linting and testing steps here
       # to ensure code quality before building and deploying.
@@ -44,9 +41,9 @@ jobs:
       #   run: npm test
 
       - name: Install dependencies
-        # 'npm ci' provides faster, more reliable builds for CI/CD environments.
-        # It requires a `package-lock.json` file, which should be committed to your repository.
-        run: npm ci
+        # Using 'npm install' is more flexible if a lock file is not present.
+        # For more reproducible builds, commit a 'package-lock.json' file and switch to 'npm ci'.
+        run: npm install
 
       - name: Build the application
         # This step executes the 'build' script defined in your package.json,
